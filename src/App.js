@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "yo yo",
-      day: "April 20 1996",
-      reminder: false,
-    },
-  ]);
+  const [showAddTask, setShowAddTask] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks();
+      setTasks(tasksFromServer);
+    };
+    getTasks();
+  }, []);
+
+  //fetch tasks
+
+  const fetchTasks = async () => {
+    const res = await fetch("http://localhost:5000/tasks");
+    const data = await res.json();
+    return data;
+  };
 
   //Toggle Reminder
   const toggleReminder = (id) => {
@@ -23,7 +33,10 @@ function App() {
   };
   //Delete task
 
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
@@ -36,8 +49,12 @@ function App() {
 
   return (
     <div className="container">
-      <Header title="Task Tracker" />
-      <AddTask onAdd={addTask} />
+      <Header
+        title="Task Tracker"
+        onAdd={() => setShowAddTask(!showAddTask)}
+        showAddTask={showAddTask}
+      />
+      {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
       ) : (
