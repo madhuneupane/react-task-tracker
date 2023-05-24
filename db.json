@@ -1,3 +1,16 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "text": "FS Assignment ",
+      "day": "Tuesday ",
+      "reminder": false,
+      "id": 1
+    },
+    {
+      "text": "Class on FS",
+      "day": "Wednesday 16:30",
+      "reminder": true,
+      "id": 2
+    }
+  ]
 }
