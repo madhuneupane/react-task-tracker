@@ -6,14 +6,20 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Completed from "./components/Completed";
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
 
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
-      setTasks(tasksFromServer);
+      setTasks(
+        tasksFromServer.filter(
+          (individualTask) => individualTask.status === "active"
+        )
+      );
     };
     getTasks();
   }, []);
@@ -23,10 +29,8 @@ function App() {
   const fetchTasks = async () => {
     const res = await fetch("http://localhost:5000/tasks");
     const data = await res.json();
-    const allTasks = data.filter(
-      (individualTask) => individualTask.status === "active"
-    );
-    return allTasks;
+    setAllTasks(data);
+    return data;
   };
 
   //fetch task
@@ -121,8 +125,9 @@ function App() {
             }
           />
           <Route path="/about" element={<About></About>} />
+          <Route path="/completed" element={<Completed></Completed>} />
         </Routes>
-        <Footer />
+        <Footer tasks={allTasks} />
       </div>
     </Router>
   );

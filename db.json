@@ -11,7 +11,7 @@
       "text": "second",
       "day": "qwe",
       "reminder": true,
-      "status": "inactive",
+      "status": "active",
       "id": 2
     },
     {
