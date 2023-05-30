@@ -110,3 +110,11 @@ footer {
   margin-top: 30px;
   text-align: center;
 }
+
+.icons{
+      
+       
+        display: flex;
+        gap: 50px;
+      
+}

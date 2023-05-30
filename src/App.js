@@ -127,7 +127,7 @@ function App() {
           <Route path="/about" element={<About></About>} />
           <Route path="/completed" element={<Completed></Completed>} />
         </Routes>
-        <Footer tasks={allTasks} />
+        <Footer />
       </div>
     </Router>
   );

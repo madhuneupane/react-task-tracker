@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "text": "first",
-      "day": "monday",
-      "reminder": true,
-      "status": "inactive",
-      "id": 1
-    },
-    {
       "text": "second",
       "day": "qwe",
       "reminder": true,
@@ -15,11 +8,11 @@
       "id": 2
     },
     {
-      "text": "hait",
-      "day": "rrrr",
-      "reminder": true,
-      "status": "inactive",
-      "id": 3
+      "text": "ho",
+      "day": "1",
+      "reminder": false,
+      "status": "active",
+      "id": 4
     }
   ]
 }
