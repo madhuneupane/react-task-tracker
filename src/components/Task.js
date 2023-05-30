@@ -1,5 +1,5 @@
 import { FaCheck } from "react-icons/fa";
-function Task({ task, onDelete, onToggle }) {
+function Task({ task, onInActivate, onToggle }) {
   return (
     <div
       className={`task ${task.reminder ? "reminder" : ""}`}
@@ -9,7 +9,7 @@ function Task({ task, onDelete, onToggle }) {
         {task.text}{" "}
         <FaCheck
           style={{ color: "gray", cursor: "pointer" }}
-          onClick={() => onDelete(task.id)}
+          onClick={() => onInActivate(task.id)}
         />
       </h3>
       <p>{task.day}</p>

@@ -10,11 +10,12 @@ import Completed from "./components/Completed";
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const [allTasks, setAllTasks] = useState([]);
 
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
+
+      //Filter is used to select only active tasks
       setTasks(
         tasksFromServer.filter(
           (individualTask) => individualTask.status === "active"
@@ -29,7 +30,6 @@ function App() {
   const fetchTasks = async () => {
     const res = await fetch("http://localhost:5000/tasks");
     const data = await res.json();
-    setAllTasks(data);
     return data;
   };
 
@@ -62,12 +62,9 @@ function App() {
       )
     );
   };
-  //Delete task
+  //Inactivate task
 
-  const deleteTask = async (id) => {
-    // await fetch(`http://localhost:5000/tasks/${id}`, {
-    //   method: "DELETE",
-    // });
+  const inActivateTask = async (id) => {
     const taskToInactivate = await fetchTask(id);
     const updatedTask = { ...taskToInactivate, status: "inactive" };
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
@@ -115,7 +112,7 @@ function App() {
                 {tasks.length > 0 ? (
                   <Tasks
                     tasks={tasks}
-                    onDelete={deleteTask}
+                    onInActivate={inActivateTask}
                     onToggle={toggleReminder}
                   />
                 ) : (

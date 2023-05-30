@@ -11,8 +11,15 @@
       "text": "ho",
       "day": "1",
       "reminder": false,
-      "status": "active",
+      "status": "inactive",
       "id": 4
+    },
+    {
+      "text": "madhu",
+      "day": "maaa",
+      "reminder": false,
+      "status": "inactive",
+      "id": 5
     }
   ]
 }

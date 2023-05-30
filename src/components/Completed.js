@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import CompletedTask from "./CompletedTask";
 import { useState, useEffect } from "react";
 
@@ -9,12 +8,13 @@ const Completed = () => {
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
+
+      //Filter method is used to select only inactive tasks
       setTotalTask(
         tasksFromServer.filter(
           (individualTask) => individualTask.status === "inactive"
         )
       );
-      //console.log(tasksFromServer);
     };
     getTasks();
   }, []);
@@ -63,6 +63,8 @@ const Completed = () => {
         onDelete={deleteTask}
         onReactivate={reActivate}
       />
+      {/* a tag is used to reload home page so that tasks can be fetched again */}
+      <a href="/">Go Back</a>
     </div>
   );
 };
